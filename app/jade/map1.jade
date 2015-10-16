@@ -1,0 +1,11 @@
+extends ./layout/default_layout.jade
+include ./blocks/header.jade
+include ./blocks/map-header-sidebar.jade
+
+block header
+	+header(true)
+		+map-header-sidebar('first')
+
+block content
+	include ./blocks/left-sidebar-map1.jade
+	include ./blocks/map-with-route.jade

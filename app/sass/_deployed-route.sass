@@ -1,0 +1,55 @@
+.deployed-route
+	border-top: 1px solid #e2e2e2
+	padding: 33px 0 20px 30px
+	margin-right: 27px
+	&__header
+		font-size: 15px
+		color: #616161
+		font-weight: 600
+		margin-bottom: 30px
+	&__points-wrap
+		border-bottom: 1px solid #e2e2e2
+		margin-bottom: 7px
+	&__point
+		padding-left: 35px
+		position: relative
+		margin-bottom: 13px
+		overflow: hidden
+		font-weight: 200
+		&-name
+			font-size: 15px
+			color: #616161
+			min-height: 18px
+			margin-bottom: 13px
+		&-distance
+			font-size: 12px
+			color: #b3b3b3
+			position: relative
+			display: inline-block
+			&:before
+				content: ""
+				position: absolute
+				left: 100%
+				top: 50%
+				margin-left: 10px
+				width: 10000px
+				border-top: 1px solid #e2e2e2
+		svg
+			position: absolute
+			left: 4px
+			top: 0
+	&__total-distance
+		font-size: 12px
+		font-weight: 200
+		text-align: right
+		color: #b3b3b3
+		margin-bottom: 16px
+.active-route
+	border-top-width: 0
+	.route-block
+		padding-top: 11px
+
+	// .route-block__right-side-content-wrap,
+	// .route-block__more-details-wrapw
+	// 	display: none
+		

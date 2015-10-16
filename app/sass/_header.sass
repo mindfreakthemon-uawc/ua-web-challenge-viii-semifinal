@@ -1,0 +1,109 @@
+header
+	position: relative
+	text-align: center
+	height: 61px
+	z-index: 10
+	.logo
+		display: inline-block
+		height: 100%
+		+max-screen($tablet-breakpoint)
+			display: block
+		svg
+			height: 36px
+			width: auto
+			display: inline-block
+			vertical-align: middle
+			margin-top: 10px
+	+max-screen(1600)
+		&.map-header
+			padding-left: 445px
+	+max-screen(620)
+		&.map-header
+			padding-left: 0
+			text-align: right
+		&.map-header .logo
+			width: 140px
+			overflow: hidden
+			display: inline-block
+			text-align: center
+
+.map-header-sidebar
+	position: absolute
+	left: 0
+	top: 0
+	bottom: 0
+	width: 445px
+	+box-sizing(border-box)
+	background-color: #434558
+	+box-shadow(3px 0 7px rgba(0,0,0,.07))
+	+max-screen(620)
+		width: auto
+		right: 140px
+	&__adress-form
+		position: absolute
+		left: 30px
+		right: 0
+		top: 0
+		bottom: 0
+		+max-screen($small-mobile-breakpoint)
+			left: 10px
+	button
+		position: absolute
+		background-color: transparent
+		top: 0
+		bottom: 0
+		display: inline-block
+		width: 60px
+		right: 10px
+		cursor: pointer
+		+max-screen($small-mobile-breakpoint)
+			right: 5
+			width: 40px
+		svg
+			position: absolute
+			left: 0
+			top: 0
+			bottom: 0
+			right: 0
+			margin: auto
+			fill: #64677a
+			width: 26px
+			height: 26px
+			+max-screen($small-mobile-breakpoint)
+				width: 23px
+				height: 23px
+		&:hover svg
+			fill: #b5b9d4
+	input[type="text"]
+		background-color: #434558
+		display: block
+		overflow: hidden
+		height: 61px
+		line-height: 61px
+		width: 100%
+		top: 0
+		bottom: 0
+		padding-right: 60px
+		font-size: 15px
+		color: #b5b9d4
+		+max-screen($small-mobile-breakpoint)
+			padding-right: 45px
+		+placeholder
+			color: #666b89
+	&__learn-more-wrap
+		background-color: #4bc382
+		+box-shadow(3px 0 7px rgba(0,0,0,.07))
+		height: 61px
+		line-height: 61px
+		+box-sizing(border-box)
+		padding: 0 70px 0 30px
+		font-size: 15px
+		text-align: left
+		color: #fff
+	& &__curtail-route-button svg
+		width: 24px
+		height: 24px
+		fill: #86e3b1
+	& &__curtail-route-button:hover svg
+		fill: #ceffe4
+

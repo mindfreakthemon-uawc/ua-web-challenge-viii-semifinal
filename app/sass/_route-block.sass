@@ -1,0 +1,93 @@
+.line-markup
+	padding-left: 32px
+	position: relative
+	&:before
+		content: ""
+		position: absolute
+		width: 20px
+		height: 4px
+		left: 0
+		top: .5em
+		margin-top: -2px
+	&-green:before
+		background-color: #4bc382
+	&-yellow:before
+		background-color: #e2aa00
+	&-red:before
+		background-color: #dd335b
+
+.route-block
+	border-left: 6px solid #fff
+	font-size: 13px
+	font-weight: 200
+	+box
+	padding: 0 27px 0 24px
+	& strong,
+	& b
+		font-size: 15px
+		font-weight: 600
+	&__header
+		font-size: 15px
+		font-weight: 200
+		margin-bottom: 4px
+	&__right-side-content-wrap
+		float: right
+		margin: 3px 0 0 10px
+		position: relative
+		z-index: 2
+	&-green
+		border-color: #4bc382
+	&-yellow
+		border-color: #e2aa00
+	&-red
+		border-color: #dd335b
+	&__line
+		overflow: hidden
+		border-top: 1px solid #e2e2e2
+		padding: 10px 0 12px
+		&:first-child
+			border-top-color: transparent
+	& input[type="checkbox"]
+		display: none
+	&__checkbox-label
+		display: inline-block
+		cursor: pointer
+		width: 36px
+		height: 20px
+		+border-radius(10px)
+		background-color: #e2e2e2
+		position: relative
+		+tr(all 300ms linear)
+		input:checked + &
+			background-color: #4bc382
+		&:before
+			content: ""
+			width: 16px
+			height: 16px
+			+border-radius(8px)
+			background-color: #fff
+			position: absolute
+			top: 2px
+			left: 2px
+			+tr(all 300ms linear)
+			input:checked + &
+				left: 18px
+	& button
+		font-size: 13px
+		color: #4bc382
+		&:hover
+			text-decoration: underline
+	& &__hide-accident-button
+		font-size: 12px
+		line-height: 1.5
+	&__accident-murkup
+		padding-left: 29px
+	&__accident-murkup svg
+		float: left
+		margin-left: -29px
+		width: 21px
+
+.accident-icon-circle
+	fill: #dd335b
+
+

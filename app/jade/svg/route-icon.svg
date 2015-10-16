@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="17" height="30" viewBox="0 0 17 30">
+  <defs>
+    <style>
+      .route-icon-cls-1 {
+        filter: url(#color-overlay-1);
+      }
+
+      .route-icon-cls-2 {
+        fill: #64677a;
+        fill-opacity: 0;
+      }
+
+      .route-icon-cls-2, .route-icon-cls-3 {
+        stroke: #d3d3d3;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+
+      .route-icon-cls-3 {
+        stroke-linecap: round;
+        fill: none;
+        fill-rule: evenodd;
+      }
+    </style>
+
+    <filter id="color-overlay-1" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#4bc382"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+      <feBlend in2="SourceGraphic" result="solidFill"/>
+    </filter>
+  </defs>
+  <g class="route-icon-cls-1">
+    <circle cx="11.5" cy="24.5" r="4.5" class="route-icon-cls-2"/>
+    <circle cx="5.5" cy="5.5" r="4.5" class="route-icon-cls-2"/>
+    <path d="M11.000,5.000 C11.000,5.000 15.000,4.750 15.000,9.000 C15.000,13.287 2.000,14.647 2.000,20.000 C2.000,24.567 6.000,24.000 6.000,24.000 " class="route-icon-cls-3"/>
+  </g>
+</svg>

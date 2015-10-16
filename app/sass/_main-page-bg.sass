@@ -1,0 +1,23 @@
+.main-background
+	overflow: hidden
+	position: absolute
+	left: 0
+	top: 0
+	right: 0
+	bottom: 0
+	z-index: 1
+	&__inner-wrap
+		margin-left: -1920px
+		width: 3840px
+		text-align: center
+		position: relative
+		left: 50%
+		+max-screen($tablet-breakpoint)
+			height: 100%
+		img
+			max-width: 50%
+			display: block
+			margin: 0 auto
+			width: auto
+			+max-screen($tablet-breakpoint)
+				height: 100%

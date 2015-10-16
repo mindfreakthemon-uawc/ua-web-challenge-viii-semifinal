@@ -1,0 +1,10 @@
+mixin header(isMapHeader)
+	if(isMapHeader)
+		header.map-header
+			block
+			a.logo(href="#" )
+				include ../svg/logo.svg
+	else
+		header
+			a.logo(href="#" )
+				include ../svg/logo.svg

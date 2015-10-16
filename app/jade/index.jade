@@ -1,0 +1,10 @@
+extends ./layout/default_layout.jade
+include ./blocks/header.jade
+
+block header
+	+header
+
+block content
+	.main-page
+		include ./blocks/main-page-bg.jade
+		include ./blocks/main-page-content.jade

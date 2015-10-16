@@ -1,0 +1,115 @@
+.main-content
+	position: relative
+	z-index: 2
+	max-width: 830px
+	+box-sizing(border-box)
+	padding: 231px 20px 100px
+	margin: 0 auto
+	text-align: center
+	+max-screen(1366)
+		padding-top: 161px
+	+max-screen($tablet-breakpoint)
+		padding: 81px 20px 20px
+	+max-screen($small-mobile-breakpoint)
+		padding: 70px 20px 20px
+	p
+		font-size: 15px
+		color: #8f919d
+		line-height: 1.4
+		font-weight: 200
+		b,
+		strong
+			font-weight: 700
+		+max-screen($tablet-breakpoint)
+			font-size: 17px
+		+max-screen($small-mobile-breakpoint)
+			font-size: 12px
+	&__header
+		font-size: 72px
+		color: #4cc984
+		font-weight: 100
+		line-height: 1
+		margin: 16px 0 19px
+		+max-screen($tablet-breakpoint)
+			font-size: 64px
+		+max-screen($mobile-breakpoint)
+			font-size: 48px
+		+max-screen($small-mobile-breakpoint)
+			font-size: 31px
+	.link-article
+		font-size: 13px
+		color: #8e93b1
+		+max-screen($tablet-breakpoint)
+			font-size: 17px
+	a
+		font-size: 13px
+		color: #4bc382
+		text-decoration: underline
+		+max-screen($tablet-breakpoint)
+			font-size: 17px
+		&:hover
+			color: #36895c
+	.search-route-form
+		padding: 60px 0 20px
+		font-size: 0
+		text-align: center
+		+max-screen($tablet-breakpoint)
+			padding: 40px 0
+		+max-screen($mobile-breakpoint)
+			padding: 20px 0
+		+max-screen($small-mobile-breakpoint)
+			padding: 0 0 10px
+		&__top-line
+			margin-bottom: 40px
+			+max-screen($tablet-breakpoint)
+				margin-bottom: 20px
+		input[type="text"]
+			text-align: center
+			font-size: 14px
+			background-color: rgba(255,255,255,.8)
+			display: inline-block
+			margin: 0 4px
+			line-height: 64px
+			height: 64px
+			overflow: hidden
+			color: #979797
+			padding: 0 32px
+			font-weight: 200
+			width: 381px
+			+box-sizing(border-box)
+			+max-screen($tablet-breakpoint)
+				display: block
+				+border-radius(32px)
+				width: 100%
+				margin: 15px 0
+			+placeholder
+				color: #979797
+				font-weight: 200
+			&:focus
+				background-color: #fff
+		&__starting-point
+			+border-radius(32px 0 0 32px)
+		&__destination-point
+			+border-radius(0 32px 32px 0)
+		&__submit-button
+			display: inline-block
+			font-size: 20px
+			color: #fff
+			font-weight: 200
+			width: 250px
+			+box-sizing(border-box)
+			padding: 0 26px
+			height: 57px
+			+border-radius(29px 30px 30px 29px, 29px 29px 30px 30px)
+			background-color: transparent
+			border: solid 1px #4bc382
+			line-height: 57px
+			+max-screen($tablet-breakpoint)
+				display: block
+				width: 100%
+			&:hover
+				color: #fff
+				background-color: #4bc382
+			&:active
+				background-color: #41a56f
+				border-color: #41a56f
