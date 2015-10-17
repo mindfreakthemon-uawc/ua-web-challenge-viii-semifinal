@@ -15,9 +15,7 @@ define([
 				$.ajax({
 					url: AddressesCollection.prototype.url,
 					dataType: 'jsonp',
-					data: {
-						contains: request.term
-					},
+					data: request,
 					success: function (data) {
 						response(data.data);
 					}

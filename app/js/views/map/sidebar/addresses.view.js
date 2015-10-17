@@ -23,6 +23,7 @@ define([
 				this.listenTo(this.addresses, 'add remove sort reset', this.render);
 				this.listenTo(this.addresses, 'fetch', this.showLoading);
 				this.listenTo(vent, 'map:address:add', this.addAddress);
+				this.listenTo(vent, 'map:address:unshift', this.unshiftAddress);
 			},
 
 			render: function () {
@@ -54,6 +55,10 @@ define([
 
 			addAddress: function (address) {
 				this.addresses.add(address);
+			},
+
+			unshiftAddress: function (address) {
+				this.addresses.unshift(address);
 			},
 
 			/* events */

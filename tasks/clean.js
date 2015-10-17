@@ -5,7 +5,7 @@ gulp.task('clean', function (callback) {
 	del([
 		'./public/css',
 		'./public/js',
-		'./public/html',
+		'./public/*.html',
 		'./public/img',
 		'./public/templates.js'
 	], callback);

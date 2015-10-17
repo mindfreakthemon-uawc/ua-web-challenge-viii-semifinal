@@ -3,33 +3,6 @@ var express = require('express'),
 
 var THROTTLING = 500;
 
-app.use(express.static('./public'));
-
-app.get('/api/addresses', function (req, res) {
-	var street = req.query.contains,
-		ids = req.query.id;
-
-
-	setTimeout(function () {
-		var data = [];
-
-		if (ids && ids.length) {
-			ids.forEach(function (id) {
-				data.push(randomAddress(null, id));
-			});
-		} else {
-			data = [
-				randomAddress(street), randomAddress(street), randomAddress(street)
-			];
-		}
-
-		res.jsonp({
-			success: true,
-			data: data
-		});
-	}, THROTTLING);
-});
-
 function randomAddress(street, id) {
 	return {
 		id: id || Math.floor(Math.random() * 10000),
@@ -99,6 +72,42 @@ function generateRoute(safetyLevel) {
 		]
 	}
 }
+
+app.use(express.static('./public'));
+
+app.get('/api/addresses', function (req, res) {
+	var street = req.query.term,
+		ids = req.query.id,
+		lat = req.query.lat,
+		lng = req.query.lng;
+
+
+	setTimeout(function () {
+		var data = [];
+
+		if (lat && lng) {
+			// asking for addresses near latLng, maybe some radius param?
+			data = [
+				randomAddress(street), randomAddress(street), randomAddress(street)
+			];
+		} else if (ids && ids.length) {
+			// asking array of addresses by theirs' ids
+			ids.forEach(function (id) {
+				data.push(randomAddress(null, id));
+			});
+		} else {
+			// asking for streets that match @contains
+			data = [
+				randomAddress(street), randomAddress(street), randomAddress(street)
+			];
+		}
+
+		res.jsonp({
+			success: true,
+			data: data
+		});
+	}, THROTTLING);
+});
 
 app.get('/api/routes', function (req, res) {
 	setTimeout(function () {

@@ -4,11 +4,12 @@ define([
 		'entities/vent',
 		'views/base.view',
 		'lib/contextMenu',
+		'modules/address/addresses.collection',
 		'tmpls'
 	],
-	function ($, _, vent, BaseView, ContextMenu, tmpls) {
+	function ($, _, vent, BaseView, ContextMenu, AddressesCollection, tmpls) {
 		/**
-		 * Caching map object is required due to memory leak of Google Maps API v3
+		 * Caching of the map object is required due to memory leak of Google Maps API v3
 		 */
 		var map, $map = $('<div id="map" class="map" />');
 
@@ -66,7 +67,6 @@ define([
 					zoom: 8,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				});
-
 			},
 
 			_setupContextMenu: function () {
@@ -79,19 +79,19 @@ define([
 						{
 							label: 'Маршрут звідси',
 							className: 'menu_item',
-							eventName: 'address:source'
+							eventName: 'map:address:add'
 						},
 						{
 							label: 'Маршрут сюди',
 							className: 'menu_item',
-							eventName: 'address:destination'
+							eventName: 'map:address:unshift'
 						}
 					],
 					pixelOffset: new google.maps.Point(10, -5),
 					zIndex: 5
 				});
 
-				google.maps.event.addListener(contextMenu, 'menu_item_selected', this._onSelect);
+				google.maps.event.addListener(contextMenu, 'menu_item_selected', this._onSelect.bind(this));
 
 				google.maps.event.addListener(map, 'rightclick', function (mouseEvent) {
 					contextMenu.show(mouseEvent.latLng);
@@ -101,14 +101,16 @@ define([
 			/* events */
 
 			_onSelect: function (latLng, eventName) {
-				alert(eventName + ' ' + latLng.lat() + ' ' + latLng.lng());
+				AddressesCollection.suggest({
+					lat: latLng.lat(),
+					lng: latLng.lng()
+				}, this._onSuggest.bind(this, eventName));
+			},
 
-				switch (eventName) {
-					case 'address:source':
-						break;
-					case 'address:destination':
-						break;
-				}
+			_onSuggest: function (eventName, data) {
+				var address = data.shift();
+
+				vent.trigger(eventName, address);
 			},
 
 			_redraw: function () {
