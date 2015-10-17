@@ -1,7 +1,7 @@
 case sidebarСondition
 	when 'first'
 		form.map-header-sidebar__adress-form(action="#")
-			input.map-header-sidebar__adress-input(type="text" tabindex="1" placeholder="Наступна точка" title="Введіть точку маршруту" required)
+			input.map-header-sidebar__adress-input(type="text" tabindex="1" placeholder="Введіть початкову точку" title="Введіть початкову точку" required)
 			button.map-header-sidebar__add-adress-button(type="submit" tabindex="2")
 				include ./blocks/svg/plus.svg
 		.map-header-sidebar__learn-more-wrap.hide Детальніше
@@ -17,7 +17,7 @@ case sidebarСondition
 				include ./blocks/svg/plus.svg
 	default
 		form.map-header-sidebar__adress-form(action="#")
-			input.map-header-sidebar__adress-input(type="text" tabindex="1" placeholder="Введіть початкову точку" title="Введіть початкову точку" required)
+			input.map-header-sidebar__adress-input(type="text" tabindex="1" placeholder="Наступна точка" title="Введіть точку маршруту" required)
 			button.map-header-sidebar__add-adress-button(type="submit" tabindex="2")
 				include ./blocks/svg/plus.svg
 		.map-header-sidebar__learn-more-wrap.hide Детальніше

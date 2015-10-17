@@ -1,17 +1,14 @@
 define([
+		'jquery',
 		'entities/vent',
 		'views/base.view',
 		'tmpls',
 
+		'modules/address/address.model',
 		'modules/address/addresses.collection'
 
 	],
-	function (
-		vent,
-		BaseView,
-		tmpls,
-		AddressesCollection
-	) {
+	function ($, vent, BaseView, tmpls, Address, AddressesCollection) {
 
 		return BaseView.extend({
 			template: tmpls.home,
@@ -19,56 +16,51 @@ define([
 			className: 'main-page',
 
 			events: {
-				'submit': 'submit',
-				'input': 'input'
+				'submit': 'submit'
 			},
 
 			initialize: function () {
-				console.log('rendering home');
+				this.values = {};
 			},
 
 			render: function () {
 				this.el.innerHTML = this.template();
 
+				this.$(':text')
+					.suggestAddress({
+						select: this.onSelect.bind(this)
+					});
+
 				return this;
 			},
-
-
-			_request: null,
 
 			submit: function (e) {
 				e.preventDefault();
 
-				vent.trigger('home:submitted', { data: 'stuff' });
+				vent.trigger('home:submitted');
+				vent.trigger('map:address:add', this.values.source);
+				vent.trigger('map:address:add', this.values.destination);
 			},
 
-			input: _.debounce(function (e) {
-				if (this._request) {
-					this._request.abort();
-				}
+			onSelect: function (e, ui) {
+				var $target = $(e.target);
 
-				this.toggleSubmit(false);
+				$target
+					.val(Address.formatRaw(ui.item));
 
-				var addresses = new AddressesCollection();
+				this.values[$target.data('type')] = ui.item;
 
-				this._request = addresses.fetch({
-					data: {
-						query: e.target.value
-					},
-					dataType: 'jsonp'
-				});
+				this.toggleSubmit();
 
-				this._request
-					.done(this.toggleSubmit.bind(this, true))
-					.fail(this.error.bind(this));
-			}, 500),
+				return false;
+			},
 
-			toggleSubmit: function (bool) {
+			toggleSubmit: function () {
+				var disabled = !(this.values.source && this.values.destination);
+
 				this.$('button')
-					.prop('disabled', !bool)
-					.toggleClass('disabled', bool);
+					.prop('disabled', disabled)
+					.toggleClass('disabled', !disabled);
 			}
-
-
 		});
 	});

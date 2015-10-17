@@ -12,5 +12,9 @@ define([
 			initialize: function () {
 
 			}
+		}, {
+			formatRaw: function (data) {
+				return data.street + ', ' + data.number
+			}
 		});
 	});

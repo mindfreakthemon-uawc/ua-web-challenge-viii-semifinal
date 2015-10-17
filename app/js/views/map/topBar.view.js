@@ -1,12 +1,10 @@
 define([
+		'entities/vent',
 		'views/base.view',
-		'tmpls',
-
-		'modules/address/addresses.collection'
-
+		'tmpls'
 
 	],
-	function (BaseView, tmpls, AddressesCollection) {
+	function (vent, BaseView, tmpls) {
 
 		return BaseView.extend({
 			template: tmpls.topBar,
@@ -18,24 +16,34 @@ define([
 			},
 
 			initialize: function (options) {
-				this.routeDestinations = options.routeDestinations;
-				this.suggester = new AddressesCollection();
+				this.addresses = options.addresses;
 
-				this.listenTo(options.routeDestinations, 'add remove change', this.render);
+				this.listenTo(this.addresses, 'add remove reset', this.render);
 			},
 
 			render: function () {
 				this.el.innerHTML = this.template({
-					sidebarCondition: this.routeDestinations.length ? 'default' : 'first'
+					sidebarСondition: this.addresses.length ? 'default' : 'first'
 				});
+
+				this.$(':text')
+					.suggestAddress({
+						select: this.onSelect.bind(this)
+					});
 
 				return this;
 			},
 
+			onSelect: function (e, ui) {
+				var $target = $(e.target);
+
+				$target.val('');
+
+				vent.trigger('map:address:add', ui.item);
+			},
+
 			submit: function (e) {
 				e.preventDefault();
-
-				alert('dont submit yet')
 			}
 		});
 	});

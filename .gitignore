@@ -42,5 +42,6 @@ bower_components
 /public/js/
 /public/templates.js
 /public/lib/
+/public/img/
 /public/*.html
 

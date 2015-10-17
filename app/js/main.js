@@ -4,7 +4,7 @@ require({
 		jquery: '../lib/jquery/dist/jquery.min',
 		underscore: '../lib/underscore/underscore-min',
 		'perfect.scrollbar': '../lib/perfect-scrollbar/js/perfect-scrollbar',
-		select2: '../lib/select2/dist/js/select2.full.min',
+		'jquery.ui': '../lib/jquery-ui/jquery-ui.min',
 		backbone: '../lib/backbone/backbone',
 		jade: '../lib/jade/runtime',
 		templates: '../templates'
@@ -21,7 +21,10 @@ require({
 
 	// vendor plugins
 	'perfect.scrollbar',
-	'select2'
+	'jquery.ui',
+
+	// custom widgets
+	'widgets/suggestAddress.widget'
 ], function (Backbone, AppView) {
 	new AppView();
 

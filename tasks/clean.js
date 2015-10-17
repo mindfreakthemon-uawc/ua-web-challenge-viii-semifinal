@@ -6,6 +6,7 @@ gulp.task('clean', function (callback) {
 		'./public/css',
 		'./public/js',
 		'./public/html',
+		'./public/img',
 		'./public/templates.js'
 	], callback);
 });

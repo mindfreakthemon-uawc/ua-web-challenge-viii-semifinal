@@ -1,6 +1,6 @@
 define([
 		'backbone',
-		'modules/route/route'
+		'modules/route/route.model'
 
 	],
 	function (Backbone, Route) {

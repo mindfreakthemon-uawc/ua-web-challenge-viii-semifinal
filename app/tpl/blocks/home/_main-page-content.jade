@@ -10,8 +10,8 @@ section.main-content
 
 	form.search-route-form(action="#")
 		.search-route-form__top-line
-			input.search-route-form__starting-point(type="text" placeholder="Адреса відправлення" title="Введіть адресу відправлення" tabindex="1" required)
-			input.search-route-form__destination-point(type="text" placeholder="Місце призначення" title="Введіть місце призначення" tabindex="2" required)
+			input.search-route-form__starting-point(type="text" placeholder="Адреса відправлення" title="Введіть адресу відправлення" tabindex="1" required data-type='source')
+			input.search-route-form__destination-point(type="text" placeholder="Місце призначення" title="Введіть місце призначення" tabindex="2" required data-type='destination')
 		.search-route-form__bot-line
 			button.search-route-form__submit-button(type="submit" tabindex="3" disabled) Показати маршрут
 	

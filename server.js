@@ -8,18 +8,18 @@ app.get('/api/addresses', function (req, res) {
 		success: true,
 		data: [
 			{
-				id: 1,
-				street: 'Pankivska',
+				id: Math.floor(Math.random() * 10000),
+				street: req.query.contains,
 				number: 1
 			},
 			{
-				id: 2,
-				street: 'Uritskogo',
+				id: Math.floor(Math.random() * 10000),
+				street: req.query.contains,
 				number: 2
 			},
 			{
-				id: 3,
-				street: 'Shmakivska',
+				id: Math.floor(Math.random() * 10000),
+				street: req.query.contains,
 				number: 3
 			}
 		]

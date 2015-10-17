@@ -1,0 +1,26 @@
+if routes.models.length
+	each route in routes.models
+		section.left-sidebar__block
+			.route-block(class='route-block-' + route.get('safetyLevel'))
+				.route-block__line
+					.route-block__right-side-content-wrap
+						input(type="checkbox" id="route1" title="Set route 1" checked="checked")
+						label.route-block__checkbox-label(for="route1" title="Показати цей маршрут")
+					h2.route-block__header.line-markup.line-markup-green Через #{route.get('keyStreet')}
+					p
+						strong #{route.get('distance')} км.
+						|  Без пробок #{route.get('timeSpan')}.
+				.route-block__line.route-block__more-details-wrap
+					button.route-block__more-details-button Детальніше
+				.route-block__line
+					.route-block__right-side-content-wrap
+						button.route-block__hide-accident-button показати ДТП
+					p.route-block__accident-murkup
+						include ./blocks/svg/accident-icon.svg
+						| За рік
+						strong= ' ' + route.get('accidentsCount') + ' '
+						| аварії,
+						strong= ' ' + route.get('victimsCount') + ' '
+						| постраждалих,
+						strong= ' ' + route.get('deathsCount') + ' '
+						| загиблих
