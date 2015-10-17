@@ -1,10 +1,16 @@
 define([
+		'jquery',
 		'underscore',
 		'entities/vent',
 		'views/base.view',
+		'lib/contextMenu',
 		'tmpls'
 	],
-	function (_, vent, BaseView, tmpls) {
+	function ($, _, vent, BaseView, ContextMenu, tmpls) {
+		/**
+		 * Caching map object is required due to memory leak of Google Maps API v3
+		 */
+		var map, $map = $('<div id="map" class="map" />');
 
 		return BaseView.extend({
 			template: tmpls.canvas,
@@ -26,13 +32,18 @@ define([
 			render: function () {
 				this.el.innerHTML = this.template();
 
-				this.map = new google.maps.Map(this.$('#map')[0], {
-					center: new google.maps.LatLng(50.4390949, 30.524734),
-					zoom: 8,
-					mapTypeId: google.maps.MapTypeId.ROADMAP
-				});
+				this.$('#map-wrapper').append($map);
+
+				this._initMap();
+				this._setupContextMenu();
 
 				return this;
+			},
+
+			close: function () {
+				this._cleanAll();
+
+				BaseView.prototype.close.apply(this, arguments);
 			},
 
 			/* private */
@@ -49,7 +60,56 @@ define([
 				this.path = [];
 			},
 
+			_initMap: function () {
+				map = map || new google.maps.Map($map[0], {
+					center: new google.maps.LatLng(50.4390949, 30.524734),
+					zoom: 8,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+
+			},
+
+			_setupContextMenu: function () {
+				var contextMenu = new ContextMenu(map, {
+					classNames: {
+						menu: 'context_menu',
+						menuSeparator: 'context_menu_separator'
+					},
+					menuItems: [
+						{
+							label: 'Маршрут звідси',
+							className: 'menu_item',
+							eventName: 'address:source'
+						},
+						{
+							label: 'Маршрут сюди',
+							className: 'menu_item',
+							eventName: 'address:destination'
+						}
+					],
+					pixelOffset: new google.maps.Point(10, -5),
+					zIndex: 5
+				});
+
+				google.maps.event.addListener(contextMenu, 'menu_item_selected', this._onSelect);
+
+				google.maps.event.addListener(map, 'rightclick', function (mouseEvent) {
+					contextMenu.show(mouseEvent.latLng);
+				});
+			},
+
 			/* events */
+
+			_onSelect: function (latLng, eventName) {
+				alert(eventName + ' ' + latLng.lat() + ' ' + latLng.lng());
+
+				switch (eventName) {
+					case 'address:source':
+						break;
+					case 'address:destination':
+						break;
+				}
+			},
 
 			_redraw: function () {
 				this._cleanAll();
@@ -72,7 +132,7 @@ define([
 						boundBox.extend(new google.maps.LatLng(routeCoordinate.lat, routeCoordinate.lng));
 					});
 
-					path.setMap(this.map);
+					path.setMap(map);
 
 					if (accidentsCoordinates.length) {
 						accidentsCoordinates.forEach(function (accident) {
@@ -82,7 +142,7 @@ define([
 								title: this._generateTitle(accident)
 							});
 
-							marker.setMap(this.map);
+							marker.setMap(map);
 
 							boundBox.extend(new google.maps.LatLng(accident.lat, accident.lng));
 
@@ -98,7 +158,7 @@ define([
 				}, this);
 
 				if (this.routes.length) {
-					this.map.setCenter(boundBox.getCenter());
+					map.setCenter(boundBox.getCenter());
 				}
 			},
 
