@@ -1,29 +1,15 @@
 define([
 		'jquery',
-		'backbone',
+		'modules/base/base.collection',
 		'modules/address/address.model'
 
 	],
-	function ($, Backbone, Address) {
+	function ($, BaseCollection, Address) {
 
-		var AddressesCollection = Backbone.Collection.extend({
+		var AddressesCollection = BaseCollection.extend({
 			model: Address,
 
-			url: 'http://localhost:8001/api/addresses',
-
-			parse: function (response) {
-				return response.data;
-			},
-
-			fetch: function (options) {
-				options = options || {};
-
-				options.dataType = 'jsonp';
-
-				this.trigger('fetch');
-
-				return Backbone.Collection.prototype.fetch.apply(this, arguments);
-			}
+			url: 'http://localhost:8001/api/addresses'
 		}, {
 			suggest: function (request, response) {
 				$.ajax({

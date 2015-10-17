@@ -8,10 +8,6 @@ define([
 			defaults: {
 				street: '<street name>',
 				number: '<number>'
-			},
-
-			initialize: function () {
-
 			}
 		}, {
 			formatRaw: function (data) {
