@@ -101,12 +101,12 @@ define([
 						{
 							label: 'Маршрут звідси',
 							className: 'menu_item',
-							eventName: 'map:address:add'
+							eventName: 'map:address:unshift'
 						},
 						{
 							label: 'Маршрут сюди',
 							className: 'menu_item',
-							eventName: 'map:address:unshift'
+							eventName: 'map:address:add'
 						}
 					],
 					pixelOffset: new google.maps.Point(10, -5),
