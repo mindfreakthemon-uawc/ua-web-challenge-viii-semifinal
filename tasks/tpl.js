@@ -32,7 +32,7 @@ function modify() {
 
 
 gulp.task('tpl', function () {
-	gulp.src('./app/tpl/**/*.jade')
+	gulp.src('./app/tpl/**//[^_]*.jade')
 		.pipe(plumber())
 		.pipe(jade({
 			client: true

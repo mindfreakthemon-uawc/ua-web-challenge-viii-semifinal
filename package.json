@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "devDependencies": {
     "del": "^2.0.2",
+    "express": "^4.13.3",
     "gulp": "^3.8.11",
     "gulp-changed": "^1.2.1",
     "gulp-compass": "^2.1.0",

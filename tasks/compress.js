@@ -7,9 +7,9 @@ var gulp = require('gulp'),
 gulp.task('compress', function() {
 	return gulp.src('./app/js/**/*.js')
 		.pipe(plumber())
-		.pipe(sourcemaps.init())
-		.pipe(uglify())
-		.pipe(sourcemaps.write('.'))
+		//.pipe(sourcemaps.init())
+		//.pipe(uglify())
+		//.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('./public/js'))
 		.pipe(connect.reload());
 });

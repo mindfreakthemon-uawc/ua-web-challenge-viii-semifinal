@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="17" height="17" viewBox="0 0 17 17">
+  <defs>
+    <style>
+      .point-icon-cls-1 {
+        fill: #fff;
+        stroke: #4bc382;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+
+      .point-icon-cls-2 {
+        fill: #4bc382;
+      }
+    </style>
+  </defs>
+  <g>
+    <circle cx="8.5" cy="8.5" r="7.5" class="point-icon-cls-1"/>
+    <circle cx="8.5" cy="8.5" r="2.5" class="point-icon-cls-2"/>
+  </g>
+</svg>
