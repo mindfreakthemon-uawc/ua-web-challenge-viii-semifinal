@@ -1,3 +1,5 @@
+include _mixins
+
 if routes.models.length
 	each route, index in routes.models
 		section.left-sidebar__block
@@ -8,8 +10,11 @@ if routes.models.length
 						label.route-block__checkbox-label(for='route' + index title='Показати цей маршрут')
 					h2.route-block__header.line-markup.line-markup-green Через #{route.get('keyStreet')}
 					p
-						strong #{route.get('distance')} км.
-						|  Без пробок #{route.get('timeSpan')}.
+						strong
+							+distance(route.get('distance'))
+						| . Без пробок #{''}
+						+timespan(route.get('timeSpan'))
+						| .
 				.route-block__line.route-block__more-details-wrap
 					button(type='button' data-index=index).fn-display-detailed.route-block__more-details-button Детальніше
 				.route-block__line

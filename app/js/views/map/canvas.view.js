@@ -63,9 +63,9 @@ define([
 						path = new google.maps.Polyline({
 							path: routeCoordinates,
 							geodesic: true,
-							strokeColor: route.get('safetyLevel'),
-							strokeOpacity: 1.0,
-							strokeWeight: 2
+							strokeColor: this._safetyLevelToColor(route.get('safetyLevel')),
+							strokeOpacity: .8,
+							strokeWeight: 5
 						});
 
 					routeCoordinates.forEach(function (routeCoordinate) {
@@ -115,6 +115,17 @@ define([
 			_generateTitle: function (accident) {
 				return 'За рік ' + accident.accidentsCount + ' аварій, ' +
 					accident.victimsCount + ' постраждалих, ' + accident.deathsCount + ' загинуло';
+			},
+
+			_safetyLevelToColor: function (safetyLevel) {
+				switch (safetyLevel) {
+					case 'yellow':
+						return '#e2aa00';
+					case 'red':
+						return '#dd335b';
+					default:
+						return '#4bc382';
+				}
 			}
 		});
 	});

@@ -1,0 +1,11 @@
+mixin distance(meters)
+   if meters > 999
+      = Math.floor(meters / 1000) + ' км'
+   else
+      = meters + ' м'
+
+mixin timespan(seconds)
+   if seconds > 3600
+      = Math.floor(seconds / 3600) + ' г'
+   else
+      = Math.floor(seconds / 60) + ' хв'

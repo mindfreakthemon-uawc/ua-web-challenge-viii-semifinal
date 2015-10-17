@@ -13,6 +13,9 @@
 	width: 25%
 	margin: 20px auto
 
+.ui-autocomplete
+	font-family: roboto, Arial, sans-serif
+
 =loading-gif($size, $offset: 10px)
 	background:
 		image: url('../img/loading.gif')
@@ -23,8 +26,7 @@
 .main-content .search-route-form input[type="text"].ui-autocomplete-loading
 	+loading-gif(50px)
 .route-build-block__route-point-field.ui-autocomplete-loading
-	+loading-gif(25px)
-
+	+loading-gif(25px, 0)
 .map-header-sidebar input[type="text"].ui-autocomplete-loading
 	+loading-gif(30px, 60px)
 
