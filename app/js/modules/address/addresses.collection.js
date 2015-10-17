@@ -11,13 +11,20 @@ define([
 
 			url: 'http://localhost:8001/api/addresses'
 		}, {
-			suggest: function (request, response) {
+
+			/**
+			 * Receive raw address objects by some criteria set in @var{request}
+			 * @static
+			 * @param request - object that will be formatted as query string for the request
+			 * @param callback - callback function, receives [rawAddress, rawAddress, ...]
+			 */
+			suggest: function (request, callback) {
 				$.ajax({
 					url: AddressesCollection.prototype.url,
 					dataType: 'jsonp',
 					data: request,
 					success: function (data) {
-						response(data.data);
+						callback(data.data);
 					}
 				});
 			}

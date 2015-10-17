@@ -22,6 +22,10 @@ define([
 				'click .fn-reset': '_reset'
 			},
 
+			/**
+			 * @param options
+			 * @param options.list - comma separated list of addressId used for preload the route
+			 */
 			initialize: function (options) {
 				this.addresses = new AddressesCollection();
 				this.routes = new RoutesCollection();
@@ -61,10 +65,19 @@ define([
 
 			/* private */
 
+			/**
+			 * Only display sidebar if the is at least one address already
+			 * @private
+			 */
 			_toggleSidebarVisibility: function () {
 				this.$('#left-sidebar').toggle(this.addresses.length > 0);
 			},
 
+			/**
+			 * Setup sidebar view based on whether it is needed to display
+			 * detailes about particular route or not
+			 * @private
+			 */
 			_setupSidebar: function () {
 				if (this.sidebarView) {
 					this.closeChildView(this.sidebarView);
@@ -90,6 +103,11 @@ define([
 				this.sidebarView.renderAll().$el.appendTo(this.$('#left-sidebar'));
 			},
 
+			/**
+			 * Parsing @var{list} and fetching resulted addresses from remote
+			 * @param list
+			 * @private
+			 */
 			_preloadAddresses: function (list) {
 				var array = list.split(':');
 

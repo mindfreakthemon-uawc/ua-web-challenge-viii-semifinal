@@ -11,7 +11,7 @@ define([
 		/**
 		 * Caching of the map object is required due to memory leak of Google Maps API v3
 		 */
-		var map, $map = $('<div id="map" class="map" />');
+		var map, contextMenu, $map = $('<div id="map" class="map" />');
 
 		return BaseView.extend({
 			template: tmpls.canvas,
@@ -38,6 +38,8 @@ define([
 				this._initMap();
 				this._setupContextMenu();
 
+				google.maps.event.addListener(contextMenu, 'menu_item_selected', this._onSelect.bind(this));
+
 				return this;
 			},
 
@@ -49,6 +51,10 @@ define([
 
 			/* private */
 
+			/**
+			 * Cleaning all the markers and routes on the map
+			 * @private
+			 */
 			_cleanAll: function () {
 				this.paths.forEach(function (item) {
 					item.path.setMap(null);
@@ -61,16 +67,32 @@ define([
 				this.path = [];
 			},
 
+			/**
+			 * Initialize map object singleton
+			 * @private
+			 */
 			_initMap: function () {
-				map = map || new google.maps.Map($map[0], {
+				if (map) {
+					return;
+				}
+
+				map = new google.maps.Map($map[0], {
 					center: new google.maps.LatLng(50.4390949, 30.524734),
 					zoom: 8,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				});
 			},
 
+			/**
+			 * Setting up context menu for right mouse click.
+			 * @private
+			 */
 			_setupContextMenu: function () {
-				var contextMenu = new ContextMenu(map, {
+				if (contextMenu) {
+					return;
+				}
+
+				contextMenu = new ContextMenu(map, {
 					classNames: {
 						menu: 'context_menu',
 						menuSeparator: 'context_menu_separator'
@@ -90,8 +112,6 @@ define([
 					pixelOffset: new google.maps.Point(10, -5),
 					zIndex: 5
 				});
-
-				google.maps.event.addListener(contextMenu, 'menu_item_selected', this._onSelect.bind(this));
 
 				google.maps.event.addListener(map, 'rightclick', function (mouseEvent) {
 					contextMenu.show(mouseEvent.latLng);
@@ -113,6 +133,11 @@ define([
 				vent.trigger(eventName, address);
 			},
 
+			/**
+			 * Big drawing method. @TODO split
+			 * Draws all markers and paths
+			 * @private
+			 */
 			_redraw: function () {
 				this._cleanAll();
 
@@ -120,7 +145,7 @@ define([
 
 				this.routes.forEach(function (route) {
 					var markers = [],
-						accidentsCoordinates = route.get('accidentsCoordinates'),
+						accidents = route.get('accidents'),
 						routeCoordinates = route.get('routeCoordinates'),
 						path = new google.maps.Polyline({
 							path: routeCoordinates,
@@ -136,8 +161,8 @@ define([
 
 					path.setMap(map);
 
-					if (accidentsCoordinates.length) {
-						accidentsCoordinates.forEach(function (accident) {
+					if (accidents.length) {
+						accidents.forEach(function (accident) {
 							var marker = new google.maps.Marker({
 								position: accident,
 								icon: '/img/accident-marker.png',
@@ -164,21 +189,42 @@ define([
 				}
 			},
 
+			/**
+			 * Toggling all markers and paths according to display settings
+			 * @private
+			 */
 			_toggle: function () {
 				this.paths.forEach(function (item) {
-					item.path.setVisible(item.route.get('display'));
+					var display = item.route.get('display'),
+						displayAccidents = item.route.get('displayAccidents');
+
+					item.path.setVisible(display);
 
 					item.markers.forEach(function (marker) {
-						marker.setVisible(item.route.get('displayAccidents'));
+						marker.setVisible(display && displayAccidents);
 					});
 				});
 			},
 
+			/* utils */
+
+			/**
+			 * Util for generating marker title
+			 * @param accident
+			 * @returns {string}
+			 * @private
+			 */
 			_generateTitle: function (accident) {
 				return 'За рік ' + accident.accidentsCount + ' аварій, ' +
 					accident.victimsCount + ' постраждалих, ' + accident.deathsCount + ' загинуло';
 			},
 
+			/**
+			 * Util for setting path's color
+			 * @param safetyLevel
+			 * @returns {*}
+			 * @private
+			 */
 			_safetyLevelToColor: function (safetyLevel) {
 				switch (safetyLevel) {
 					case 'yellow':

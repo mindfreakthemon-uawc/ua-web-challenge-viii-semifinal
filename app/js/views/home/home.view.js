@@ -15,7 +15,7 @@ define([
 			className: 'main-page',
 
 			events: {
-				'submit': 'submit'
+				'submit': '_submit'
 			},
 
 			initialize: function () {
@@ -30,7 +30,21 @@ define([
 				this.attachWidget(
 					this.$(':text')
 						.suggestAddress({
-							select: this.onSelect.bind(this)
+							select: this._onSelect.bind(this),
+							position: {
+								// fix for main page only
+								using: function (css, ui) {
+									var isSource = ui.target.element.data('type') === 'source';
+
+									if (isSource) {
+										css.left += 50;
+									}
+
+									css.width = ui.element.width - 50;
+
+									ui.element.element.css(css);
+								}
+							}
 						})
 						.data('custom-suggestAddress')
 				);
@@ -38,7 +52,9 @@ define([
 				return this;
 			},
 
-			submit: function (e) {
+			/* events */
+
+			_submit: function (e) {
 				e.preventDefault();
 
 				vent.trigger('home:submitted');
@@ -46,19 +62,24 @@ define([
 				vent.trigger('map:address:add', this.values.destination);
 			},
 
-			onSelect: function (e, ui) {
+			_onSelect: function (e, ui) {
 				var $target = $(e.target);
 
 				$target.val(Address.formatRaw(ui.item));
 
+				// store selected address in the hash
 				this.values[$target.data('type')] = ui.item;
 
-				this.toggleSubmit();
+				this._toggleSubmit();
 
 				return false;
 			},
 
-			toggleSubmit: function () {
+			/**
+			 * Toggles "Show Route" button
+			 * @private
+			 */
+			_toggleSubmit: function () {
 				var disabled = !(this.values.source && this.values.destination);
 
 				this.$('button')

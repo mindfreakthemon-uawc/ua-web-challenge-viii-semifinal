@@ -10,6 +10,9 @@ define([
 	],
 	function ($, vent, Address, AddressesCollection) {
 
+		/**
+		 * Widget, based on autocomplete, that autoformats received items
+		 */
 		$.widget('custom.suggestAddress', $.ui.autocomplete, {
 			options: {
 				appendTo: null,
