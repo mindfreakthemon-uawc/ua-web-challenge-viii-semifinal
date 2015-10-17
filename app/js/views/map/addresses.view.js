@@ -24,14 +24,19 @@ define([
 			},
 
 			render: function () {
+				this.detachAllWidgets();
+
 				this.el.innerHTML = this.template({
 					addresses: this.addresses
 				});
 
-				this.$(':text')
-					.suggestAddress({
-						select: this.onSelect.bind(this)
-					});
+				this.attachWidget(
+					this.$(':text')
+						.suggestAddress({
+							select: this.onSelect.bind(this)
+						})
+						.data('custom-suggestAddress')
+				);
 
 				return this;
 			},

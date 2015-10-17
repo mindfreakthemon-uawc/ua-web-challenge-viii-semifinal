@@ -10,8 +10,47 @@ define([
 				console.error.apply(console, arguments);
 			},
 
+
+			/**
+			 * @type Array|null
+			 */
+			widgets: null,
+
+			/**
+			 * Adding jQueryUI widget to keep track of
+			 * @param widget
+			 */
+			attachWidget: function (widget) {
+				if (!this.widgets) {
+					this.widgets = [];
+				}
+
+				this.widgets.push(widget);
+			},
+
+			/**
+			 * Removing all widgets for nice cleanup
+			 */
+			detachAllWidgets: function () {
+				if (!this.widgets) {
+					return;
+				}
+
+				this.widgets.forEach(function (widget) {
+					widget.destroy();
+				});
+			},
+
+
+			/**
+			 * @type Array|null
+			 */
 			childViews: null,
 
+			/**
+			 * Adding child Backbone View to keep track of
+			 * @param view
+			 */
 			addChildView: function (view) {
 				if (!this.childViews) {
 					this.childViews = [];
@@ -20,18 +59,9 @@ define([
 				this.childViews.push(view);
 			},
 
-			closeChildView: function (view) {
-				if (!this.childViews) {
-					return;
-				}
-
-				var index = this.childViews.indexOf(view);
-
-				if (index > -1) {
-					this.childViews[index].close();
-				}
-			},
-
+			/**
+			 * Closing all child views for nice cleanup
+			 */
 			closeAllChildViews: function () {
 				if (!this.childViews) {
 					return;
@@ -44,6 +74,7 @@ define([
 
 			close: function () {
 				this.closeAllChildViews();
+				this.detachAllWidgets();
 
 				this.remove();
 			}

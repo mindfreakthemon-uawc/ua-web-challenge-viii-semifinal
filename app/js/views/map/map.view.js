@@ -17,6 +17,8 @@ define([
 		return BaseView.extend({
 			template: tmpls.map,
 
+			className: 'map-page',
+
 			events: {
 				'click .fn-reset': '_reset'
 			},
