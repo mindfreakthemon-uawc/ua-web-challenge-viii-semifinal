@@ -5,6 +5,7 @@ define([
 
 	],
 	function ($, Backbone, Address) {
+
 		var AddressesCollection = Backbone.Collection.extend({
 			model: Address,
 
@@ -12,6 +13,14 @@ define([
 
 			parse: function (response) {
 				return response.data;
+			},
+
+			fetch: function (options) {
+				options = options || {};
+
+				options.dataType = 'jsonp';
+
+				return Backbone.Collection.prototype.fetch.apply(this, arguments);
 			}
 		}, {
 			suggest: function (request, response) {

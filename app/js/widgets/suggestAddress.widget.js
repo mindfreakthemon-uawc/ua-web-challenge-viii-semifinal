@@ -3,7 +3,9 @@ define([
 		'entities/vent',
 
 		'modules/address/address.model',
-		'modules/address/addresses.collection'
+		'modules/address/addresses.collection',
+
+		'jquery.ui'
 
 	],
 	function ($, vent, Address, AddressesCollection) {

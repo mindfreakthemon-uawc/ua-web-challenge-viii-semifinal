@@ -1,19 +1,28 @@
 define([
+		'underscore',
 		'entities/vent',
 		'views/base.view',
 		'tmpls'
 	],
-	function (vent, BaseView, tmpls) {
+	function (_, vent, BaseView, tmpls) {
 
 		return BaseView.extend({
 			template: tmpls.routes,
+
+			className: 'left-sidebar__block',
+			tagName: 'section',
+
+			events: {
+				'change .fn-display-flag': '_toggleRoute',
+				'click .fn-display-accidents-flag': '_toggleAccidents'
+			},
 
 			initialize: function (options) {
 				this.addresses = options.addresses;
 				this.routes = options.routes;
 
 				this.listenTo(this.addresses, 'add remove reset', this.recalculate);
-				this.listenTo(this.routes, 'add remove reset', this.render);
+				this.listenTo(this.routes, 'add remove reset change:displayAccidents', this.render);
 			},
 
 			render: function () {
@@ -31,40 +40,30 @@ define([
 					return;
 				}
 
-				this.routes.reset([{
-					id: Math.floor(1000 * Math.random()),
-					keyStreet: 'asdasd',
-					distance: 123123,
-					timeSpan: 34353,
+				this.routes.fetch({
+					reset: true,
+					data: {
+						addressId: _.pluck(this.addresses.models, 'id')
+					}
+				})
+			},
 
-					accidentsCount: 2,
-					victimsCount: 3,
-					deathsCount: 245,
+			/* events */
 
-					safetyLevel: 'green'
-				}, {
-					id: Math.floor(1000 * Math.random()),
-					keyStreet: 'asdasd',
-					distance: 123123,
-					timeSpan: 34353,
+			_toggleRoute: function (e) {
+				var $target = $(e.target),
+					index = $target.data('index'),
+					item = this.routes.at(index);
 
-					accidentsCount: 2,
-					victimsCount: 3,
-					deathsCount: 245,
+				item.set('display', $target.is(':checked'));
+			},
 
-					safetyLevel: 'yellow'
-				}, {
-					id: Math.floor(1000 * Math.random()),
-					keyStreet: 'asdasd',
-					distance: 123123,
-					timeSpan: 34353,
+			_toggleAccidents: function (e) {
+				var $target = $(e.target),
+					index = $target.data('index'),
+					item = this.routes.at(index);
 
-					accidentsCount: 2,
-					victimsCount: 3,
-					deathsCount: 245,
-
-					safetyLevel: 'red'
-				}])
+				item.set('displayAccidents', !item.get('displayAccidents'));
 			}
 		});
 	});

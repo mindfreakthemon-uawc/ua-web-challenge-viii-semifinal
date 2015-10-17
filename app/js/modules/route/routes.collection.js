@@ -8,10 +8,18 @@ define([
 		return Backbone.Collection.extend({
 			model: Route,
 
-			url: '/api/routes',
+			url: 'http://localhost:8001/api/routes',
 
-			initialize: function () {
+			parse: function (response) {
+				return response.data;
+			},
 
+			fetch: function (options) {
+				options = options || {};
+
+				options.dataType = 'jsonp';
+
+				return Backbone.Collection.prototype.fetch.apply(this, arguments);
 			}
 		});
 	});

@@ -18,10 +18,10 @@ define([
 			template: tmpls.map,
 
 			events: {
-				'click .fn-reset': 'reset'
+				'click .fn-reset': '_reset'
 			},
 
-			initialize: function () {
+			initialize: function (options) {
 				this.addresses = new AddressesCollection();
 				this.routes = new RoutesCollection();
 
@@ -38,16 +38,21 @@ define([
 					routes: this.routes
 				});
 
-
 				this.addChildView(this.topBarView);
 				this.addChildView(this.addressesView);
 				this.addChildView(this.routesView);
 
-				// statically link topBar against header
+				// statically link topBar to header
 				this.topBarView.render().$el.prependTo('header');
 
 				this.listenTo(vent, 'map:address:add', this.addAddress);
-				this.listenTo(this.addresses, 'add remove reset', this.toggleSidebarVisibility.bind(this));
+				this.listenTo(this.addresses, 'add remove reset', this._change);
+
+
+				if (options.list) {
+					this.preloadAddresses(options.list.split(':'));
+
+				}
 			},
 
 			render: function () {
@@ -57,8 +62,8 @@ define([
 
 				this.toggleSidebarVisibility();
 
-				this.addressesView.$el.appendTo(this.$('#destinations'));
-				this.routesView.$el.appendTo(this.$('#routes'));
+				this.routesView.$el.prependTo(this.$('#sections'));
+				this.addressesView.$el.prependTo(this.$('#sections'));
 
 				return this;
 			},
@@ -71,7 +76,27 @@ define([
 				this.addresses.add(address);
 			},
 
-			reset: function (e) {
+			preloadAddresses: function (array) {
+				this.addresses.fetch({
+					reset: true,
+					data: {
+						id: array
+					}
+				});
+			},
+
+			/* events */
+
+			_change: function () {
+				this.toggleSidebarVisibility();
+
+				vent.trigger('app:navigate',
+					this.addresses.models.length
+						? 'map/' + _.pluck(this.addresses.models, 'id').join(':')
+						: 'map');
+			},
+
+			_reset: function (e) {
 				e.preventDefault();
 
 				this.addresses.reset();

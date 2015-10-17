@@ -4,11 +4,10 @@ define([
 		'views/base.view',
 		'tmpls',
 
-		'modules/address/address.model',
-		'modules/address/addresses.collection'
+		'modules/address/address.model'
 
 	],
-	function ($, vent, BaseView, tmpls, Address, AddressesCollection) {
+	function ($, vent, BaseView, tmpls, Address) {
 
 		return BaseView.extend({
 			template: tmpls.home,
@@ -45,8 +44,7 @@ define([
 			onSelect: function (e, ui) {
 				var $target = $(e.target);
 
-				$target
-					.val(Address.formatRaw(ui.item));
+				$target.val(Address.formatRaw(ui.item));
 
 				this.values[$target.data('type')] = ui.item;
 

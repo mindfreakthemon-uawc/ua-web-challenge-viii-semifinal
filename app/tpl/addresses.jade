@@ -1,36 +1,35 @@
-.route-build-block__line.route-build-block__head-line
-   .route-build-block__line-left
-      include ./blocks/svg/route-icon.svg
-   .route-build-block__line-right
-      button.fn-reset.route-build-block__close-route-button
-         include ./blocks/svg/close.svg
-   .route-build-block__line-midle
-      h2 Маршрути
-.route-build-block__line.route-points-list-wrap
+.route-build-block
+	.route-build-block__line.route-build-block__head-line
+		.route-build-block__line-left
+			include ./blocks/svg/route-icon.svg
+		.route-build-block__line-right
+			button.fn-reset.route-build-block__close-route-button
+				include ./blocks/svg/close.svg
+		.route-build-block__line-midle
+			h2 Маршрути
+	.route-build-block__line.route-points-list-wrap
+		ul.route-build-block__route-points-list
+			each destination, index in addresses.models
+				li
+					- var isLast = (index + 1) === addresses.models.length;
+					- var isFirst = index === 0;
 
+					if isLast
+						include ./blocks/svg/pin-final-adress.svg
+					else
+						include ./blocks/svg/point-icon.svg
 
-   ul.route-build-block__route-points-list
-      each destination, index in addresses.models
-         li
-            - var isLast = (index + 1) === addresses.models.length;
-            - var isFirst = index === 0;
+					= destination.get('street') + ', ' + destination.get('number')
 
-            if isLast
-               include ./blocks/svg/pin-final-adress.svg
-            else
-               include ./blocks/svg/point-icon.svg
+					if !isLast && !isFirst
+						.route-build-block__line-right
+							button.fn-remove(type="button" data-id=destination.id).route-build-block__close-route-points-button
+								include ./blocks/svg/close.svg
 
-            = destination.get('street') + ', ' + destination.get('number')
-
-            if !isLast && !isFirst
-               .route-build-block__line-right
-                  button.fn-remove(type="button" data-id=destination.id).route-build-block__close-route-points-button
-                     include ./blocks/svg/close.svg
-
-.route-build-block__line
-   form(action="#")
-      .route-build-block__line-left
-         button(type="submit" tabindex="3").route-build-block__add-route-point
-            include ./blocks/svg/plus.svg
-      .route-build-block__line-midle
-         input.route-build-block__route-point-field(type="text" placeholder="|" title="Введіть наступну адресу" tabindex="2" required)
+	.route-build-block__line
+		form(action="#")
+			.route-build-block__line-left
+				button(type="submit" tabindex="3").route-build-block__add-route-point
+					include ./blocks/svg/plus.svg
+			.route-build-block__line-midle
+				input.route-build-block__route-point-field(type="text" placeholder="|" title="Введіть наступну адресу" tabindex="2" required)

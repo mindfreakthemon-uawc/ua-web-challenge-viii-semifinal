@@ -17,13 +17,16 @@ define([
 
 			initialize: function (options) {
 				this.addresses = options.addresses;
+				this.sidebarСondition = options.sidebarСondition;
 
 				this.listenTo(this.addresses, 'add remove reset', this.render);
 			},
 
 			render: function () {
 				this.el.innerHTML = this.template({
-					sidebarСondition: this.addresses.length ? 'default' : 'first'
+					sidebarСondition: this.sidebarСondition ?
+						this.sidebarСondition :
+						(this.addresses.length ? 'default' : 'first')
 				});
 
 				this.$(':text')

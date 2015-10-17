@@ -9,7 +9,8 @@ define([
 		return BaseView.extend({
 			template: tmpls.addresses,
 
-			className: 'route-build-block',
+			className: 'left-sidebar__block',
+			tagName: 'section',
 
 			events: {
 				'submit': 'submit',
@@ -27,17 +28,24 @@ define([
 					addresses: this.addresses
 				});
 
+				this.$(':text')
+					.suggestAddress({
+						select: this.onSelect.bind(this)
+					});
+
 				return this;
+			},
+
+			onSelect: function (e, ui) {
+				var $target = $(e.target);
+
+				$target.val('');
+
+				vent.trigger('map:address:add', ui.item);
 			},
 
 			submit: function (e) {
 				e.preventDefault();
-
-				this.addresses.add({
-					id: Math.floor(Math.random() * 1000),
-					street: 'asdasdas',
-					number: 42
-				});
 
 				this.$(':text').focus();
 			},

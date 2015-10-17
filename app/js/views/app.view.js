@@ -22,21 +22,26 @@ define([
 
 			initialize: function () {
 				router.route('', 'home', this.showHome.bind(this));
-				router.route('map', 'map', this.showMap.bind(this));
+				router.route('map(/:list)', 'map', this.showMap.bind(this));
 
-				this.listenTo(vent, 'home:submitted', this.showMap.bind(this));
+				// page flow events
+				this.listenTo(vent, 'home:submitted', function () {
+					this.navigate('map');
+					this.showMap();
+				});
+
+				// util events
+				this.listenTo(vent, 'app:navigate', this.navigate.bind(this));
 			},
 
 			showHome: function () {
-				router.navigate('');
-
 				this.showView(new HomeView());
 			},
 
-			showMap: function () {
-				router.navigate('map');
-
-				this.showView(new MapView());
+			showMap: function (list) {
+				this.showView(new MapView({
+					list: list
+				}));
 			},
 
 			currentView: null,
@@ -49,6 +54,10 @@ define([
 				this.currentView = view;
 
 				this.$el.empty().append(view.render().el);
+			},
+
+			navigate: function (path) {
+				router.navigate(path);
 			},
 
 			redirect: function (e) {
