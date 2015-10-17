@@ -8,5 +8,25 @@
 #application
 	height: calc(100% - 61px)
 
+.loading
+	display: block
+	width: 25%
+	margin: 20px auto
+
+=loading-gif($size, $offset: 10px)
+	background:
+		image: url('../img/loading.gif')
+		position: right $offset center
+		repeat: no-repeat
+		size: $size
+
+.main-content .search-route-form input[type="text"].ui-autocomplete-loading
+	+loading-gif(50px)
+.route-build-block__route-point-field.ui-autocomplete-loading
+	+loading-gif(25px)
+
+.map-header-sidebar input[type="text"].ui-autocomplete-loading
+	+loading-gif(30px, 60px)
+
 [disabled]
 	opacity: .5

@@ -21,6 +21,7 @@ define([
 				this.addresses = options.addresses;
 
 				this.listenTo(this.addresses, 'add remove sort reset', this.render);
+				this.listenTo(this.addresses, 'fetch', this.showLoading);
 				this.listenTo(vent, 'map:address:add', this.addAddress);
 			},
 

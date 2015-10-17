@@ -19,6 +19,8 @@ define([
 
 				options.dataType = 'jsonp';
 
+				this.trigger('fetch');
+
 				return Backbone.Collection.prototype.fetch.apply(this, arguments);
 			}
 		});

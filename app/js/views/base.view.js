@@ -1,13 +1,18 @@
 define([
-		'backbone'
+		'backbone',
+		'tmpls'
 
 	],
-	function (Backbone) {
+	function (Backbone, tmpls) {
 
 		return Backbone.View.extend({
 
-			error: function () {
+			showError: function () {
 				console.error.apply(console, arguments);
+			},
+
+			showLoading: function () {
+				this.el.innerHTML = tmpls.loading();
 			},
 
 

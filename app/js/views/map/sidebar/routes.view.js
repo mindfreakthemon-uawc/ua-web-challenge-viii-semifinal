@@ -23,6 +23,8 @@ define([
 
 				this.listenTo(this.addresses, 'add remove sort reset', this.recalculate);
 				this.listenTo(this.routes, 'add remove reset change:displayAccidents', this.render);
+				this.listenTo(this.addresses, 'fetch', this.showLoading);
+				this.listenTo(this.routes, 'fetch', this.showLoading);
 			},
 
 			render: function () {
