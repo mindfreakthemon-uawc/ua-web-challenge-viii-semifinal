@@ -44,6 +44,8 @@ define([
 			},
 
 			close: function () {
+				google.maps.event.clearListeners(contextMenu, 'menu_item_selected');
+
 				this._cleanAll();
 
 				BaseView.prototype.close.apply(this, arguments);
