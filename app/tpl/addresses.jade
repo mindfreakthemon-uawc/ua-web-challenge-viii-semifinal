@@ -1,10 +1,10 @@
 .route-build-block
 	.route-build-block__line.route-build-block__head-line
 		.route-build-block__line-left
-			include ./blocks/svg/route-icon.svg
+			include ./svg/route-icon.svg
 		.route-build-block__line-right
 			button.fn-reset.route-build-block__close-route-button
-				include ./blocks/svg/close.svg
+				include ./svg/close.svg
 		.route-build-block__line-midle
 			h2 Маршрути
 	.route-build-block__line.route-points-list-wrap
@@ -16,21 +16,21 @@
 
 					span.route-build-block__route-points-handle.fn-handle
 						if isLast
-							include ./blocks/svg/pin-final-adress.svg
+							include ./svg/pin-final-adress.svg
 						else
-							include ./blocks/svg/point-icon.svg
+							include ./svg/point-icon.svg
 
 					= destination.get('street') + ', ' + destination.get('number')
 
 					if !isLast && !isFirst
 						.route-build-block__line-right
 							button.fn-remove(type="button" data-id=destination.id).route-build-block__close-route-points-button
-								include ./blocks/svg/close.svg
+								include ./svg/close.svg
 
 	.route-build-block__line
 		form(action="#")
 			.route-build-block__line-left
 				button(type="submit" tabindex="3").route-build-block__add-route-point
-					include ./blocks/svg/plus.svg
+					include ./svg/plus.svg
 			.route-build-block__line-midle
 				input.route-build-block__route-point-field(type="text" placeholder="|" title="Введіть наступну адресу" tabindex="2" required)

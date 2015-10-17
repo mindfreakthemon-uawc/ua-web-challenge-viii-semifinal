@@ -49,7 +49,53 @@ app.get('/api/routes', function (req, res) {
 					victimsCount: Math.floor(Math.random() * 255),
 					deathsCount: Math.floor(Math.random() * 255),
 
-					safetyLevel: 'green'
+					safetyLevel: 'green',
+
+					accidentsCoordinates: [
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2,
+
+							accidentsCount: Math.floor(Math.random() * 255),
+							victimsCount: Math.floor(Math.random() * 255),
+							deathsCount: Math.floor(Math.random() * 255)
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2,
+
+							accidentsCount: Math.floor(Math.random() * 255),
+							victimsCount: Math.floor(Math.random() * 255),
+							deathsCount: Math.floor(Math.random() * 255)
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2,
+
+							accidentsCount: Math.floor(Math.random() * 255),
+							victimsCount: Math.floor(Math.random() * 255),
+							deathsCount: Math.floor(Math.random() * 255)
+						}
+					],
+
+					routeCoordinates: [
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						}
+					]
 				}, {
 					id: Math.floor(1000 * Math.random()),
 					keyStreet: 'asdasd',
@@ -60,7 +106,53 @@ app.get('/api/routes', function (req, res) {
 					victimsCount: Math.floor(Math.random() * 255),
 					deathsCount: Math.floor(Math.random() * 255),
 
-					safetyLevel: 'yellow'
+					safetyLevel: 'yellow',
+
+					accidentsCoordinates: [
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2,
+
+							accidentsCount: Math.floor(Math.random() * 255),
+							victimsCount: Math.floor(Math.random() * 255),
+							deathsCount: Math.floor(Math.random() * 255)
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2,
+
+							accidentsCount: Math.floor(Math.random() * 255),
+							victimsCount: Math.floor(Math.random() * 255),
+							deathsCount: Math.floor(Math.random() * 255)
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2,
+
+							accidentsCount: Math.floor(Math.random() * 255),
+							victimsCount: Math.floor(Math.random() * 255),
+							deathsCount: Math.floor(Math.random() * 255)
+						}
+					],
+
+					routeCoordinates: [
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						}
+					]
 				}, {
 					id: Math.floor(1000 * Math.random()),
 					keyStreet: 'asdasd',
@@ -71,7 +163,53 @@ app.get('/api/routes', function (req, res) {
 					victimsCount: Math.floor(Math.random() * 255),
 					deathsCount: Math.floor(Math.random() * 255),
 
-					safetyLevel: 'red'
+					safetyLevel: 'red',
+
+					accidentsCoordinates: [
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2,
+
+							accidentsCount: Math.floor(Math.random() * 255),
+							victimsCount: Math.floor(Math.random() * 255),
+							deathsCount: Math.floor(Math.random() * 255)
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2,
+
+							accidentsCount: Math.floor(Math.random() * 255),
+							victimsCount: Math.floor(Math.random() * 255),
+							deathsCount: Math.floor(Math.random() * 255)
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2,
+
+							accidentsCount: Math.floor(Math.random() * 255),
+							victimsCount: Math.floor(Math.random() * 255),
+							deathsCount: Math.floor(Math.random() * 255)
+						}
+					],
+
+					routeCoordinates: [
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						},
+						{
+							lat: 50.4390949 + Math.random() * 2,
+							lng: 30.524734 + Math.random() * 2
+						}
+					]
 				}
 			]
 		});

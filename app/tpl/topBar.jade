@@ -1,27 +1,26 @@
-case sidebarСondition
-	when 'first'
-		form.map-header-sidebar__adress-form(action="#")
-			input.map-header-sidebar__adress-input(type="text" tabindex="1" placeholder="Введіть початкову точку" title="Введіть початкову точку" required)
-			button.map-header-sidebar__add-adress-button(type="submit" tabindex="2")
-				include ./blocks/svg/plus.svg
-		.map-header-sidebar__learn-more-wrap.hide Детальніше
-			button.map-header-sidebar__curtail-route-button
-				include ./blocks/svg/close.svg
-	when 'deployed-route'
-		.map-header-sidebar__learn-more-wrap Детальніше
-			button.map-header-sidebar__curtail-route-button
-				include ./blocks/svg/close.svg
-		form.map-header-sidebar__adress-form.hide(action="#")
-			input.map-header-sidebar__adress-input(type="text" tabindex="1" placeholder="Наступна точка" title="Введіть точку маршруту" required)
-			button.map-header-sidebar__add-adress-button(type="submit" tabindex="2")
-				include ./blocks/svg/plus.svg
-	default
-		form.map-header-sidebar__adress-form(action="#")
-			input.map-header-sidebar__adress-input(type="text" tabindex="1" placeholder="Наступна точка" title="Введіть точку маршруту" required)
-			button.map-header-sidebar__add-adress-button(type="submit" tabindex="2")
-				include ./blocks/svg/plus.svg
-		.map-header-sidebar__learn-more-wrap.hide Детальніше
-			button.map-header-sidebar__curtail-route-button
-				include ./blocks/svg/close.svg
+if detailed
+	.map-header-sidebar__learn-more-wrap Детальніше
+		button(type='button').fn-hide-detailed.map-header-sidebar__curtail-route-button
+			include ./svg/close.svg
+	form.map-header-sidebar__adress-form.hide(action="#")
+		input.map-header-sidebar__adress-input(type="text" tabindex="1" placeholder="Наступна точка" title="Введіть точку маршруту" required)
+		button.map-header-sidebar__add-adress-button(type="submit" tabindex="2")
+			include ./svg/plus.svg
+else if addresses.models.length
+	form.map-header-sidebar__adress-form(action="#")
+		input.map-header-sidebar__adress-input(type="text" tabindex="1" placeholder="Наступна точка" title="Введіть точку маршруту" required)
+		button.map-header-sidebar__add-adress-button(type="submit" tabindex="2")
+			include ./svg/plus.svg
+	.map-header-sidebar__learn-more-wrap.hide Детальніше
+		button.map-header-sidebar__curtail-route-button
+			include ./svg/close.svg
+else
+	form.map-header-sidebar__adress-form(action="#")
+		input.map-header-sidebar__adress-input(type="text" tabindex="1" placeholder="Введіть початкову точку" title="Введіть початкову точку" required)
+		button.map-header-sidebar__add-adress-button(type="submit" tabindex="2")
+			include ./svg/plus.svg
+	.map-header-sidebar__learn-more-wrap.hide Детальніше
+		button.map-header-sidebar__curtail-route-button
+			include ./svg/close.svg
 
 

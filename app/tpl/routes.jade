@@ -11,7 +11,7 @@ if routes.models.length
 						strong #{route.get('distance')} км.
 						|  Без пробок #{route.get('timeSpan')}.
 				.route-block__line.route-block__more-details-wrap
-					button.route-block__more-details-button Детальніше
+					button(type='button' data-index=index).fn-display-detailed.route-block__more-details-button Детальніше
 				.route-block__line
 					.route-block__right-side-content-wrap
 						button(type='button' data-index=index).fn-display-accidents-flag.route-block__hide-accident-button
@@ -20,7 +20,7 @@ if routes.models.length
 							else
 								| показати ДТП
 					p.route-block__accident-murkup
-						include ./blocks/svg/accident-icon.svg
+						include ./svg/accident-icon.svg
 						| За рік
 						strong= ' ' + route.get('accidentsCount') + ' '
 						| аварії,

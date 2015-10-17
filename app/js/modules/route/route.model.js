@@ -9,6 +9,7 @@ define([
 			defaults: {
 				display: true,
 				displayAccidents: true,
+				displayDetailed: false,
 
 				keyStreet: '<string>',
 				distance: '<number in meters>',
@@ -26,14 +27,14 @@ define([
 					comment: '<string>'
 				}],
 
-				accidentPoints: [{
-					latitude: '<number>',
-					longitude: '<number>'
+				accidentsCoordinates: [{
+					lat: '<number>',
+					lng: '<number>'
 				}],
 
-				routePoints: [{
-					latitude: '<number>',
-					longitude: '<number>'
+				routeCoordinates: [{
+					lat: '<number>',
+					lng: '<number>'
 				}]
 			}
 		});

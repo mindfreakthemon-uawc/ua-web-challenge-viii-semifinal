@@ -1,10 +1,9 @@
 define([
-		'underscore',
 		'entities/vent',
 		'views/base.view',
 		'tmpls'
 	],
-	function (_, vent, BaseView, tmpls) {
+	function (vent, BaseView, tmpls) {
 
 		return BaseView.extend({
 			template: tmpls.routes,
@@ -14,7 +13,8 @@ define([
 
 			events: {
 				'change .fn-display-flag': '_toggleRoute',
-				'click .fn-display-accidents-flag': '_toggleAccidents'
+				'click .fn-display-accidents-flag': '_toggleAccidents',
+				'click .fn-display-detailed': '_toggleDetailed'
 			},
 
 			initialize: function (options) {
@@ -43,7 +43,7 @@ define([
 				this.routes.fetch({
 					reset: true,
 					data: {
-						addressId: _.pluck(this.addresses.models, 'id')
+						addressId: this.addresses.pluck('id')
 					}
 				})
 			},
@@ -56,6 +56,14 @@ define([
 					item = this.routes.at(index);
 
 				item.set('display', $target.is(':checked'));
+			},
+
+			_toggleDetailed: function (e) {
+				var $target = $(e.target),
+					index = $target.data('index'),
+					item = this.routes.at(index);
+
+				item.set('displayDetailed', true);
 			},
 
 			_toggleAccidents: function (e) {

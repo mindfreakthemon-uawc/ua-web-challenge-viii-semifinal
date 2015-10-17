@@ -21,6 +21,7 @@ define([
 				this.addresses = options.addresses;
 
 				this.listenTo(this.addresses, 'add remove sort reset', this.render);
+				this.listenTo(vent, 'map:address:add', this.addAddress);
 			},
 
 			render: function () {
@@ -48,6 +49,10 @@ define([
 				);
 
 				return this;
+			},
+
+			addAddress: function (address) {
+				this.addresses.add(address);
 			},
 
 			/* events */
