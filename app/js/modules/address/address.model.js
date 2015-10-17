@@ -8,6 +8,10 @@ define([
 			defaults: {
 				street: '<street name>',
 				number: '<number>'
+			},
+
+			format: function () {
+				return this.get('street') + ', ' + this.get('number');
 			}
 		}, {
 			formatRaw: function (data) {

@@ -1,38 +1,40 @@
-section.deployed-route
-	h2.deployed-route__header вул. Ковпака, 8
-	.deployed-route__points-wrap
-		.deployed-route__point
-			.deployed-route__point-name Направляйтесь на запад по вул. Ковпака в сторону вул. Анрі Барбюсаa
-			.deployed-route__point-distance 450м
-			include ./svg/arrow-forward.svg
-		.deployed-route__point
-			.deployed-route__point-name Поверните направо на вул. Велика Васильківська
-			.deployed-route__point-distance 450м
-			include ./svg/arrow-right.svg
-		.deployed-route__point
-			.deployed-route__point-name Поверните налево на вул. Саксаганського
-			.deployed-route__point-distance 450м
-			include ./svg/arrow-left.svg
-		.deployed-route__point
-			.deployed-route__point-name Поверните налево на вул. Льва Толстого
-			.deployed-route__point-distance 450м
-			include ./svg/arrow-left.svg
-		.deployed-route__point
-			.deployed-route__point-name Выполните разворот
-			.deployed-route__point-distance 450м
-			include ./svg/arrow-turn.svg
-		.deployed-route__point
-			.deployed-route__point-name Направляйтесь на запад по вул. Ковпака в сторону вул. Анрі Барбюса
-			.deployed-route__point-distance 450м
-			include ./svg/arrow-forward.svg
-		.deployed-route__point
-			.deployed-route__point-name Поверните направо на вул. Велика Васильківська
-			.deployed-route__point-distance 450м
-			include ./svg/arrow-right.svg
-		.deployed-route__point
-			.deployed-route__point-name Продолжайте движение по вул. Льва Толстого
-			.deployed-route__point-distance 450м
-			include ./svg/arrow-forward.svg
-	.deployed-route__total-distance 5,6km
+include _mixins
 
-	h2.deployed-route__header вул. Льва Толстого, 65
+mixin arrow(type)
+	case type
+		when 'forward'
+			include ./svg/arrow-forward.svg
+		when 'left'
+			include ./svg/arrow-left.svg
+		when 'right'
+			include ./svg/arrow-right.svg
+		when 'turn'
+			include ./svg/arrow-turn.svg
+
+mixin comment(type)
+	case type
+		when 'forward'
+			|  Рухайтесь прямо по #{''}
+		when 'left'
+			| Поверніть наліво на #{''}
+		when 'right'
+			| Поверніть направо на #{''}
+		when 'turn'
+			| Зробіть розворот на #{''}
+
+section.deployed-route
+	h2.deployed-route__header= addresses.first().format()
+
+	.deployed-route__points-wrap
+		each point in detailed.get('navigation')
+			.deployed-route__point
+				.deployed-route__point-name
+					+comment(point.type)
+					= point.comment
+				.deployed-route__point-distance
+					+distance(point.distance)
+				+arrow(point.type)
+	.deployed-route__total-distance
+		+distance(detailed.get('distance'))
+
+	h2.deployed-route__header= addresses.last().format()

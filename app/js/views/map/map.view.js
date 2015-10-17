@@ -74,7 +74,9 @@ define([
 
 				if (detailed) {
 					this.sidebarView = new SidebarDetailedView({
-						detailed: detailed
+						detailed: detailed,
+						addresses: this.addresses,
+						routes: this.routes
 					});
 				} else {
 					this.sidebarView = new SidebarDefaultView({

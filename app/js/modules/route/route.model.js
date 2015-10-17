@@ -22,7 +22,7 @@ define([
 				safetyLevel: '<enum of green,yellow,red>',
 
 				navigation: [{
-					type: '<enum of left, right, uturn, forward>',
+					type: '<enum of left,right,turn,forward>',
 					distance: '<number>',
 					comment: '<string>'
 				}],

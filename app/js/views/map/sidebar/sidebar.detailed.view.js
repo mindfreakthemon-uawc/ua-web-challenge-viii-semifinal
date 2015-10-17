@@ -14,11 +14,13 @@ define([
 
 			initialize: function (options) {
 				this.detailed = options.detailed;
+				this.addresses = options.addresses;
 			},
 
 			render: function () {
 				this.el.innerHTML = this.template({
-					detailed: this.detailed
+					detailed: this.detailed,
+					addresses: this.addresses
 				});
 
 				return this;

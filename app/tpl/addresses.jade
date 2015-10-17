@@ -20,7 +20,7 @@
 						else
 							include ./svg/point-icon.svg
 
-					= destination.get('street') + ', ' + destination.get('number')
+					span.route-build-block__route-points-handle.fn-handle= destination.format()
 
 					if !isLast && !isFirst
 						.route-build-block__line-right
