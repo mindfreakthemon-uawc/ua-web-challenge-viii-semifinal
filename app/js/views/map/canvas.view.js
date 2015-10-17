@@ -32,7 +32,6 @@ define([
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				});
 
-
 				return this;
 			},
 
@@ -76,15 +75,16 @@ define([
 					path.setMap(this.map);
 
 					if (accidentsCoordinates.length) {
-						accidentsCoordinates.forEach(function (accidentCoordinate) {
+						accidentsCoordinates.forEach(function (accident) {
 							var marker = new google.maps.Marker({
-								position: accidentCoordinate,
-								icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png'
+								position: accident,
+								icon: '/img/accident-marker.png',
+								title: this._generateTitle(accident)
 							});
 
 							marker.setMap(this.map);
 
-							boundBox.extend(new google.maps.LatLng(accidentCoordinate.lat, accidentCoordinate.lng));
+							boundBox.extend(new google.maps.LatLng(accident.lat, accident.lng));
 
 							markers.push(marker);
 						}, this);
@@ -110,6 +110,11 @@ define([
 						marker.setVisible(item.route.get('displayAccidents'));
 					});
 				});
+			},
+
+			_generateTitle: function (accident) {
+				return 'За рік ' + accident.accidentsCount + ' аварій, ' +
+					accident.victimsCount + ' постраждалих, ' + accident.deathsCount + ' загинуло';
 			}
 		});
 	});
