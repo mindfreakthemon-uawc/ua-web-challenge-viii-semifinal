@@ -8,16 +8,17 @@
 		.route-build-block__line-midle
 			h2 Маршрути
 	.route-build-block__line.route-points-list-wrap
-		ul.route-build-block__route-points-list
+		ul#addresses.route-build-block__route-points-list
 			each destination, index in addresses.models
-				li
+				li(data-id=destination.id)
 					- var isLast = (index + 1) === addresses.models.length;
 					- var isFirst = index === 0;
 
-					if isLast
-						include ./blocks/svg/pin-final-adress.svg
-					else
-						include ./blocks/svg/point-icon.svg
+					span.route-build-block__route-points-handle.fn-handle
+						if isLast
+							include ./blocks/svg/pin-final-adress.svg
+						else
+							include ./blocks/svg/point-icon.svg
 
 					= destination.get('street') + ', ' + destination.get('number')
 

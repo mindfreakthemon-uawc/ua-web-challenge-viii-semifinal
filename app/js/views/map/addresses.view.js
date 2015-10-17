@@ -13,14 +13,14 @@ define([
 			tagName: 'section',
 
 			events: {
-				'submit': 'submit',
-				'click .fn-remove': 'removeAddress'
+				'submit': '_submit',
+				'click .fn-remove': '_removeAddress'
 			},
 
 			initialize: function (options) {
 				this.addresses = options.addresses;
 
-				this.listenTo(this.addresses, 'add remove reset', this.render);
+				this.listenTo(this.addresses, 'add remove sort reset', this.render);
 			},
 
 			render: function () {
@@ -33,15 +33,26 @@ define([
 				this.attachWidget(
 					this.$(':text')
 						.suggestAddress({
-							select: this.onSelect.bind(this)
+							select: this._onSelect.bind(this)
 						})
 						.data('custom-suggestAddress')
+				);
+
+				this.attachWidget(
+					this.$('#addresses')
+						.sortable({
+							handle: '.fn-handle',
+							update: this._onUpdate.bind(this)
+						})
+						.data('ui-sortable')
 				);
 
 				return this;
 			},
 
-			onSelect: function (e, ui) {
+			/* events */
+
+			_onSelect: function (e, ui) {
 				var $target = $(e.target);
 
 				$target.val('');
@@ -49,13 +60,29 @@ define([
 				vent.trigger('map:address:add', ui.item);
 			},
 
-			submit: function (e) {
+			_onUpdate: function (e, ui) {
+				var array = this.$('#addresses li')
+					.map(function () {
+						return $(this).data('id');
+					})
+					.get();
+
+				this.addresses.comparator = function (a, b) {
+					return array.indexOf(a.id) - array.indexOf(b.id);
+				};
+
+				this.addresses.sort();
+
+				delete this.addresses.comparator;
+			},
+
+			_submit: function (e) {
 				e.preventDefault();
 
 				this.$(':text').focus();
 			},
 
-			removeAddress: function (e) {
+			_removeAddress: function (e) {
 				e.preventDefault();
 
 				var $target = $(e.target),

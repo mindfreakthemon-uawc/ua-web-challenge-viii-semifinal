@@ -21,7 +21,7 @@ define([
 				this.addresses = options.addresses;
 				this.routes = options.routes;
 
-				this.listenTo(this.addresses, 'add remove reset', this.recalculate);
+				this.listenTo(this.addresses, 'add remove sort reset', this.recalculate);
 				this.listenTo(this.routes, 'add remove reset change:displayAccidents', this.render);
 			},
 

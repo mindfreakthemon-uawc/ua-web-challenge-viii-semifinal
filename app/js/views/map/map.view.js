@@ -6,13 +6,14 @@ define([
 		'views/map/topBar.view',
 		'views/map/addresses.view',
 		'views/map/routes.view',
+		'views/map/canvas.view',
 
 		'modules/address/addresses.collection',
 		'modules/route/routes.collection'
 
 
 	],
-	function (vent, BaseView, tmpls, TopBarView, AddressesView, RoutesView, AddressesCollection, RoutesCollection) {
+	function (vent, BaseView, tmpls, TopBarView, AddressesView, RoutesView, CanvasView, AddressesCollection, RoutesCollection) {
 
 		return BaseView.extend({
 			template: tmpls.map,
@@ -40,20 +41,25 @@ define([
 					routes: this.routes
 				});
 
+				this.canvasView = new CanvasView({
+					addresses: this.addresses,
+					routes: this.routes
+				});
+
 				this.addChildView(this.topBarView);
 				this.addChildView(this.addressesView);
 				this.addChildView(this.routesView);
+				this.addChildView(this.canvasView);
 
 				// statically link topBar to header
 				this.topBarView.render().$el.prependTo('header');
 
 				this.listenTo(vent, 'map:address:add', this.addAddress);
-				this.listenTo(this.addresses, 'add remove reset', this._change);
+				this.listenTo(this.addresses, 'add remove sort reset', this._change);
 
 
 				if (options.list) {
 					this.preloadAddresses(options.list.split(':'));
-
 				}
 			},
 
@@ -66,6 +72,9 @@ define([
 
 				this.routesView.$el.prependTo(this.$('#sections'));
 				this.addressesView.$el.prependTo(this.$('#sections'));
+
+				// statically append to self
+				this.canvasView.render().$el.appendTo(this.$el);
 
 				return this;
 			},
